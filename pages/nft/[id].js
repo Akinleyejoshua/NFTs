@@ -92,6 +92,8 @@ export default function MarketPlace() {
   }
 
   async function buyNFT(tokenId) {
+    if (!state.auth) showAlert("d", "Connect Wallet");
+    if (!state.auth) return;
     try {
       const contract = createEthereumContract();
       const salePrice = ethers.utils.parseUnits(nft.price, 'ether')
@@ -103,7 +105,7 @@ export default function MarketPlace() {
       showAlert("s", 'You successfully bought the NFT!');
     }
     catch (e) {
-      showAlert("s", "You already own this NFT!")
+      showAlert("d", "You dont have enough Eth")
     }
   }
   useEffect(() => {
@@ -165,7 +167,7 @@ export default function MarketPlace() {
                           )}
                         </div>
 
-                        {state.walletAddress === nft.owner ? <button className='btn cover'>
+                        {state.walletAddress === nft.seller ? <button className='btn cover'>
 
                           <AiOutlineUser fontSize={20} />
                           <p>Owner</p>

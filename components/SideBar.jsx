@@ -6,7 +6,7 @@ import {
 } from "react-icons/md";
 
 import {useRouter} from "next/router";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 
 export const SideBar = () => {
@@ -16,7 +16,11 @@ export const SideBar = () => {
     nav.push(path);
   }
 
-  const {logout, state} = useContext(GlobalContext);
+  const {logout, state, getUserData} = useContext(GlobalContext);
+
+  useEffect(() => {
+    getUserData();
+  }, [nav])
 
   return <div className="sidebar flex col">
     <div className="navbrand">

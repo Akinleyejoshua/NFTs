@@ -4,6 +4,7 @@ import Image from "next/image";
 import Logo from "../assets/img.jpg";
 import { SiEthereum } from "react-icons/si";
 import { useRouter } from "next/router";
+import { GrRotateLeft } from "react-icons/gr";
 
 export const NFTs = () => {
   const { state, likeNFT } = useContext(GlobalContext);
@@ -128,11 +129,10 @@ export const NFTs = () => {
       <h4 style={{ marginBottom: "1rem" }}>Trending</h4>
 
       <div className="slide">
+
         {state.NFTs.length === 0 ? (
-          <h2>No Trending NFT int the Markey</h2>
-        ) : trending
-        
-        }
+          <h2>No Trending NFT in the Market</h2>
+        ) : trending}
       </div>
 
       <h4 style={{ marginBottom: "1rem" }}>Market</h4>

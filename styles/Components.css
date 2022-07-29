@@ -74,7 +74,7 @@ nav * {
 
 header button {
     background-color: transparent;
-    padding: 1rem;
+    padding: .5rem;
     border-radius: 20px 20px 0 0;
     border: 0px solid white;
 }
@@ -220,7 +220,9 @@ main {
     opacity: .5;
 }
 
-
+.price{
+    display: flex;
+}
 
 .my-nfts .like,
 .nfts .like {
@@ -406,6 +408,8 @@ input::placeholder {
 
 .alert p{
     text-align: center;
+    padding: .5rem;
+    width: 100%;
 }
 
 .alert .content .icon{
@@ -422,8 +426,11 @@ input::placeholder {
 }
 
 @media screen and (max-width: 640px) {
+    .alert{
+        padding: 1rem;
+    }
     .alert .content{
-        width: max-content;
+        width: 15rem;
     }
 
     .sidebar {
@@ -435,7 +442,7 @@ input::placeholder {
     }
 
     header nav {
-        padding: 2rem;
+        padding: 1rem 2rem;
     }
 
     main {

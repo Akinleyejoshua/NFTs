@@ -72,6 +72,8 @@ export const GlobalProvider = ({ children }) => {
   async function getTokenData(tokenId) {
     const contract = createEthereumContract();
     const trx = await contract.getAllNFTs();
+    // handleStateChange("loading", true);
+
     let sumPrice = 0;
     handleStateChange("noOfNFTs", trx.length);
 
@@ -103,11 +105,14 @@ export const GlobalProvider = ({ children }) => {
 
     handleStateChange("totalNFTsEth", sumPrice.toFixed(2));
     handleStateChange("NFTs", items);
+    handleStateChange("loading", false);
+
   }
 
   async function getMyTokens() {
     const contract = createEthereumContract();
     const trx = await contract.getMyNFTs();
+    handleStateChange("loading", true);
 
     const items = await Promise.all(
       trx.map(async (items) => {
@@ -130,9 +135,11 @@ export const GlobalProvider = ({ children }) => {
         return item;
       })
     );
+    handleStateChange("loading", false);
+    
+    if (items.length > 0) return handleStateChange("myNFTs", items);
+    handleStateChange("myNFTs", ["You dont own any NFT"]);
 
-    if (items) return handleStateChange("myNFTs", items);
-    handleStateChange("myNFTs", "You have no NFT");
   }
 
   const handleStateChange = (name, value) => {
@@ -154,7 +161,7 @@ export const GlobalProvider = ({ children }) => {
         className="shorten-address"
         onClick={() => {
           navigator.clipboard.writeText(address);
-          alert("Copied!");
+          showAlert("s", "Copied!")
         }}
       >{`${address.slice(0, 5)}...${address.slice(address.length - 4)}`}</div>
     );
@@ -179,7 +186,7 @@ export const GlobalProvider = ({ children }) => {
       handleStateChange("walletBalance", bal);
       handleStateChange("earnings", amount);
     } catch (err) {
-      console.log(err);
+      showAlert("d", "Poor internet connection!")
       null;
     }
 
@@ -238,13 +245,12 @@ export const GlobalProvider = ({ children }) => {
       getUserData();
     } catch (error) {
       console.log(error);
-      alert("Authentication failed");
+      showAlert("d", "Authentication failed");
     }
   };
 
   useEffect(() => {
     checkIfConnected();
-    console.log(1);
   }, [token]);
 
   return (

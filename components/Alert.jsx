@@ -6,7 +6,7 @@ export const Alert = ({type, value}) => {
     const {handleStateChange} = useContext(GlobalContext);
 
     return <div className="alert">
-        <div className="content glassmorphism cover" onClick={() => handleStateChange("alert", false)}>
+        <div className="content glassmorphism cover" onClick={() => (handleStateChange("alert", false), handleStateChange("msg", ""))}>
             {type === "d" ? <AiOutlineInfoCircle className={`icon alert-danger`}/>: <AiOutlineCheckCircle className="icon alert-success"/>}
             <p className="value">
                 {value}

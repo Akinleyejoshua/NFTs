@@ -25,7 +25,7 @@ export const MyNFTs = () => {
     }
   };
 
-  const arr = state.myNFTs.map((items, i) => (
+  const arr = state?.myNFTs?.map((items, i) => (
     <div className="item glassmorphism" key={i}>
       <div className="img">
         <img src={items.image} />
@@ -74,17 +74,20 @@ export const MyNFTs = () => {
 
   return (
     <section className="my-nfts">
-      {state.auth ? <>
-      <h1 style={{ marginBottom: "1rem" }}>My NFTs</h1>
+      {state.auth ? (
+        <>
+          <h1 style={{ marginBottom: "1rem" }}>My NFTs</h1>
+          {console.log(state.MyNFTs)}
+          {state.loading && <GrRotateLeft className="rotate" fontSize={20}/>}
+          {state.myNFTs[0] === "You dont own any NFT" ? (
+            <p>You dont own any NFT</p>
+          ): <div className="nft-items">{arr}</div>}{" "}
 
-      {state.myNFTs.length === 0 ? (
-        <h2><GrRotateLeft fontSize={20} className="rotate" /></h2>
+
+        </>
       ) : (
-        <div className="nft-items">{arr}</div>
+        <p>Connect Your Wallet!</p>
       )}
-      </>: <p>Connect Your Wallet!</p>}
-      
-      
     </section>
   );
 };

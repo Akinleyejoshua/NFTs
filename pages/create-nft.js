@@ -13,7 +13,7 @@ import { ethers } from "ethers";
 import { Alert } from "../components/Alert";
 
 export default function ListNFT() {
-  const { state, handleStateChange, createEthereumContract, showAlert } = useContext(GlobalContext);
+  const { state, handleStateChange, createEthereumContract, showAlert, getUserData } = useContext(GlobalContext);
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -99,13 +99,15 @@ export default function ListNFT() {
     console.log(contract)
 
     //actually create the NFT
-    let transaction = await contract.createToken(metadataURL, priceEth, { value: listingPrice })
+    let transaction = await contract.createToken(metadataURL, priceEth, { value: listingPrice });
+    showAlert("s", "Please wait!");
+
     await transaction.wait()
 
     showAlert("s", "Successfully listed your NFT!");
-    setForm({ name: '', description: '', price: '', img: ""});
-    // handleStateChange("msg", "");
-    
+    getUserData();
+    // setForm({ name: '', description: '', price: '', img: ""});
+
   }
 
   return (
