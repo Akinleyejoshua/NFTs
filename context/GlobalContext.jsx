@@ -194,7 +194,6 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const getUserData = async () => {
-    await getBalances();
     await getMyTokens();
     await getTokenData();
   };
@@ -242,8 +241,8 @@ export const GlobalProvider = ({ children }) => {
 
       handleStateChange("walletAddress", accounts[0]);
       handleStateChange("auth", true);
-      getBalances(state.walletAddress);
-      getUserData();
+      await checkIfConnected();
+
     } catch (error) {
       console.log(error);
       showAlert("d", "Authentication failed");
