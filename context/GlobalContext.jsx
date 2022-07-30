@@ -194,6 +194,7 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const getUserData = async () => {
+    await getBalances();
     await getMyTokens();
     await getTokenData();
   };
