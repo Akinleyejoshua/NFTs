@@ -83,6 +83,7 @@ export default function MarketPlace() {
         image: meta.image,
         name: meta.name,
         description: meta.description,
+        likes: listedToken.likes.toNumber()
       }
 
       setNFT(item);
