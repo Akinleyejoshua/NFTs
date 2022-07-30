@@ -433,6 +433,10 @@ input::placeholder {
         width: 15rem;
     }
 
+    .like button{
+        padding: .5rem 1rem;
+    }
+
     .sidebar {
         display: none;
     }

@@ -5,6 +5,7 @@ import Logo from "../assets/img.jpg";
 import { SiEthereum } from "react-icons/si";
 import { useRouter } from "next/router";
 import { GrRotateLeft } from "react-icons/gr";
+import { AiOutlineEye } from "react-icons/ai";
 
 export const NFTs = () => {
   const { state, likeNFT } = useContext(GlobalContext);
@@ -26,13 +27,9 @@ export const NFTs = () => {
   };
 
   const arr = state.NFTs.map((items, i) => (
-    <div
-      className="item glassmorphism"
-      key={i}
-    >
-      <div className="img" >
-      
-      <img src={items.image}/>
+    <div className="item glassmorphism" key={i}>
+      <div className="img">
+        <img src={items.image} />
 
         <div className="content">
           <div className="flex space-between">
@@ -45,106 +42,119 @@ export const NFTs = () => {
           {/* <div className="flex space-between">
               <p className="description">{items.description}</p>
             </div> */}
-           <div className="like flex w-abs w-abs space-between">
-              <div>
-                {items.liked ? (
-                  <div
-                    className="cover flex"
-                    onClick={(event) => like(event, items.tokenId)}
-                  >
-                    <i className="material-icons">favorite</i>
-                    <p>{items.likes}</p>
-                  </div>
-                ) : (
-                  <div
-                    className="cover flex"
-                    onClick={(event) => like(event, items.tokenId)}
-                  >
-                    <i className="material-icons">favorite_border</i>
-                    <p>{items.likes}</p>
-                  </div>
-                )}
-              </div>
-              <button className="btn cover" onClick={() => nav.push(`/nft/${items.tokenId}`)}>View</button>
+          <div className="like flex w-abs w-abs space-between">
+            <div>
+              {items.liked ? (
+                <div
+                  className="cover flex"
+                  onClick={(event) => like(event, items.tokenId)}
+                >
+                  <i className="material-icons">favorite</i>
+                  <p>{items.likes}</p>
+                </div>
+              ) : (
+                <div
+                  className="cover flex"
+                  onClick={(event) => like(event, items.tokenId)}
+                >
+                  <i className="material-icons">favorite_border</i>
+                  <p>{items.likes}</p>
+                </div>
+              )}
             </div>
+            <button
+              className="btn cover"
+              onClick={() => nav.push(`/nft/${items.tokenId}`)}
+            >
+              <AiOutlineEye fontSize={20} />
+              <p>view</p>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   ));
 
-  const trending = state.NFTs.map((items, i) =>
-    items?.likes >= 2 && (
-      <div
-        className="item glassmorphism"
-        key={i}
-      >
-        <div className="img">
-          {/* <Image src={items.image} height={250} width={40}/> */}
+  const trending = state.NFTs.map(
+    (items, i) =>
+      items?.likes >= 2 && (
+        <div className="item glassmorphism" key={i}>
+          <div className="img">
+            {/* <Image src={items.image} height={250} width={40}/> */}
 
-          <img src={items.image}/>
+            <img src={items.image} />
 
-          <div className="content">
-            <div className="flex space-between">
-              <p className="name">{items.name}</p>
-              <p className="price">
-                <SiEthereum />
-                {items.price}
-              </p>
-            </div>
-            {/* <div className="flex space-between">
+            <div className="content">
+              <div className="flex space-between">
+                <p className="name">{items.name}</p>
+                <p className="price">
+                  <SiEthereum />
+                  {items.price}
+                </p>
+              </div>
+              {/* <div className="flex space-between">
               <p className="description">{items.description}</p>
             </div> */}
-            <div className="like flex w-abs w-abs space-between">
-              <div>
-                {items.liked ? (
-                  <div
-                    className="cover flex"
-                    onClick={(event) => like(event, items.tokenId)}
-                  >
-                    <i className="material-icons">favorite</i>
-                    <p>{items.likes}</p>
-                  </div>
-                ) : (
-                  <div
-                    className="cover flex"
-                    onClick={(event) => like(event, items.tokenId)}
-                  >
-                    <i className="material-icons">favorite_border</i>
-                    <p>{items.likes}</p>
-                  </div>
-                )}
+              <div className="like flex w-abs space-between">
+                <div>
+                  {items.liked ? (
+                    <div
+                      className="cover flex"
+                      onClick={(event) => like(event, items.tokenId)}
+                    >
+                      <i className="material-icons">favorite</i>
+                      <p>{items.likes}</p>
+                    </div>
+                  ) : (
+                    <div
+                      className="cover flex"
+                      onClick={(event) => like(event, items.tokenId)}
+                    >
+                      <i className="material-icons">favorite_border</i>
+                      <p>{items.likes}</p>
+                    </div>
+                  )}
+                </div>
+                <button
+                  className="btn cover"
+                  onClick={() => nav.push(`/nft/${items.tokenId}`)}
+                >
+                  <AiOutlineEye fontSize={20} />
+                  <p>view</p>
+                </button>
               </div>
-              <button className="btn cover" onClick={() => nav.push(`/nft/${items.tokenId}`)}>View</button>
             </div>
           </div>
         </div>
-      </div>
-    )
+      )
   );
 
   return (
     <section className="nfts">
-      {state.auth ?  <>
-      <h1 style={{ marginBottom: "1rem" }}>NFTs</h1>
-      <h4 style={{ marginBottom: "1rem" }}>Trending</h4>
+      {state.auth ? (
+        <>
+          <h1 style={{ marginBottom: "1rem" }}>NFTs</h1>
+          <h4 style={{ marginBottom: "1rem" }}>Trending</h4>
 
-      <div className="slide">
+          <div className="slide">
+            {state.NFTs.length === 0 ? (
+            <GrRotateLeft className="rotate" fontSize={20}/>
+            ) : (
+              trending
+            )}
+          </div>
 
-        {state.NFTs.length === 0 ? (
-          <h2>No Trending NFT in the Market</h2>
-        ) : trending}
-      </div>
+          <h4 style={{ marginBottom: "1rem" }}>Market</h4>
 
-      <h4 style={{ marginBottom: "1rem" }}>Market</h4>
-
-      {state.NFTs.length === 0 ? (
-        <h2>No NFT in the market</h2>
+          {state.NFTs.length === 0 ? (
+            <GrRotateLeft className="rotate" fontSize={20}/>
+          ) : (
+            <div className="nft-items">{arr}</div>
+          )}
+        </>
       ) : (
-        <div className="nft-items">{arr}</div>
+        <p>Connect your wallet!</p>
       )}
-      </>
-     : <p>Connect your wallet!</p>}
-     
     </section>
   );
 };

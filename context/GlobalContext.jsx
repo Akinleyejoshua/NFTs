@@ -110,9 +110,9 @@ export const GlobalProvider = ({ children }) => {
   }
 
   async function getMyTokens() {
+    handleStateChange("loading", true);
     const contract = createEthereumContract();
     const trx = await contract.getMyNFTs();
-    handleStateChange("loading", true);
 
     const items = await Promise.all(
       trx.map(async (items) => {
@@ -212,7 +212,7 @@ export const GlobalProvider = ({ children }) => {
       }
     } catch (err) {
       // alert("Please install A Wallet");
-      showAlert("Plase install a wallet");
+      showAlert("d", "Plase install a wallet");
       console.log(err);
     }
   };

@@ -14,7 +14,7 @@ import { GrRotateLeft } from 'react-icons/gr';
 import { Alert } from '../../components/Alert';
 
 export default function MarketPlace() {
-  const { state, createEthereumContract, showAlert } = useContext(GlobalContext);
+  const { state, createEthereumContract, showAlert, likeNFT } = useContext(GlobalContext);
 
   const [nft, setNFT] = useState({
     tokenId: "",
@@ -59,7 +59,8 @@ export default function MarketPlace() {
           name: items.name,
           description: items.description,
           price: items.price,
-          likes: items.likes
+          likes: items.likes,
+          liked: items.liked,
         };
 
         setNFT(item);
@@ -150,7 +151,7 @@ export default function MarketPlace() {
                       </div>
                       <div className="like flex space-between w-abs">
                         <div>
-                          {true ? (
+                          {nft.liked ? (
                             <div className="cover flex" onClick={(event) => like(event, 1)}>
                               <i className="material-icons">
                                 favorite
