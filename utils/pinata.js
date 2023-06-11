@@ -15,7 +15,8 @@ export const uploadJSONToIPFS = async(JSONBody) => {
                 pinata_api_key: key,
                 pinata_secret_api_key: secret,
                 "Access-Control-Allow-Origin": "*",
-                "Authentication": "Bearer 9XJmIpiG1XPlZ5pXYMEAWoyAldymsDowPXE5efLtpgOAsrsk960RTpGetyHXenOd"
+                "Authentication": "Bearer 9XJmIpiG1XPlZ5pXYMEAWoyAldymsDowPXE5efLtpgOAsrsk960RTpGetyHXenOd",
+                'Accept': 'text/plain'
             }
         })
         .then(function (response) {
