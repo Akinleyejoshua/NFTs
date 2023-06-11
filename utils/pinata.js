@@ -1,5 +1,5 @@
-const key = process.env.NEXT_PUBLIC_PINATA_KEY;
-const secret = process.env.NEXT_PUBLIC_PINATA_SECRET;
+const key = "fa701cd68aaf5542d983;
+const secret = "238463c2e8c61094698e6a48acf0cc3ca7b42aaf9ccd0d33a8e19f0278411de6";
 
 // console.log(key)
 
