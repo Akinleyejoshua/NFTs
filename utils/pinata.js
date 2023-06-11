@@ -1,5 +1,5 @@
 const key = "fa701cd68aaf5542d983"
-const secret = "9XJmIpiG1XPlZ5pXYMEAWoyAldymsDowPXE5efLtpgOAsrsk960RTpGetyHXenOd";
+const secret = "238463c2e8c61094698e6a48acf0cc3ca7b42aaf9ccd0d33a8e19f0278411de6";
 
 // console.log(key)
 
